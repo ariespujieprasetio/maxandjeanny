@@ -1,69 +1,16 @@
-import Image from "next/image";
-
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
-}
+﻿import Image from "next/image"; import {Baby,BookOpen,GraduationCap,Music2,Sparkles,Users,Volume2} from "lucide-react"; import {Button,Eyebrow,SectionHeading} from "@/components/ui"; import {ProgramCard,LocationCard} from "@/components/cards"; import {TrialFinder} from "@/components/trial-finder"; import {programs,locations,testimonials,faqs,images} from "@/data/content";
+const audiences=[[Baby,"Early Learners","A joyful first encounter with sound, rhythm, and movement."],[Sparkles,"Children","Strong foundations shaped through play, curiosity, and steady progress."],[Music2,"Teens","Creative skills, growing independence, and music that feels personal."],[Users,"Adults","Begin something new or reconnect with the music you have missed."]];
+const benefits=[[BookOpen,"Learning with direction","A clear path helps every new skill feel achievable."],[GraduationCap,"Guidance that listens","Teaching shaped around each learner’s pace and personality."],[Volume2,"Confidence on stage","Performance gives practice purpose and progress a moment to shine."],[Users,"Music at every age","A welcoming place for first notes, next steps, and fresh beginnings."]];
+export default function Home(){return <>
+<section className="hero"><div className="container hero-grid"><div><Eyebrow>Yamaha Music School</Eyebrow><h1>Music Starts Here.</h1><p className="hero-copy">From a child’s first note to a lifelong love of music, discover a place to learn, play, and grow.</p><div className="hero-actions"><Button href="/trial">Book a Trial Class</Button><Button href="/programs" variant="secondary">Explore Programs</Button></div><p className="trust-line"><span/>Music for every stage of life</p></div><div className="hero-visual"><div className="hero-main"><Image src={images.hero} alt="Young musician learning in a warm music school setting" fill preload sizes="(max-width:768px) 100vw, 55vw"/></div><div className="hero-note"><strong>First notes. Big dreams.</strong><span>Learn · Play · Grow</span></div></div></div></section>
+<section className="intro"><div className="container intro-grid"><div><Eyebrow>More than lessons</Eyebrow><h2>A lifelong relationship with music.</h2></div><div className="intro-copy"><p>Music gives us ways to listen, express, and believe in ourselves. At every age, learning becomes a story of small discoveries and proud moments.</p><div className="values">{["Confidence","Creativity","Discipline","Expression"].map(v=><div className="value" key={v}>{v}</div>)}</div></div></div></section>
+<section className="audience-section"><div className="container"><SectionHeading eyebrow="Find the right class" title="Find the right place to begin." copy="Every musical journey starts differently. Tell us who is learning and we’ll help you discover the right program."/><div className="audience-grid">{audiences.map(([Icon,title,copy])=>{const I=Icon as typeof Baby;return <article className="audience-card" key={title as string}><I/><span>{title as string}</span><p>{copy as string}</p></article>})}</div><div className="section-action align-left"><Button href="/programs">Find My Program</Button></div></div></section>
+<section className="program-section"><div className="container"><SectionHeading eyebrow="Explore music" title="Find an instrument that feels like you." copy="From playful first sounds to confident performance, choose a path that makes you want to keep playing."/><div className="program-grid editorial-programs">{programs.slice(0,4).map(p=><ProgramCard key={p.slug} program={p}/>)}</div><div className="helper-cta"><div><strong>Not sure which program is right?</strong><span>Tell us the student’s age and interests.</span></div><Button href="/trial" variant="secondary">Help Me Choose</Button></div></div></section>
+<section className="why"><div className="container"><SectionHeading eyebrow="Why Max & Jeanny" title="Learn with joy. Grow with confidence." copy="Where thoughtful guidance, consistent practice, and the excitement of making music come together."/><div className="benefit-grid">{benefits.map(([Icon,title,copy])=>{const I=Icon as typeof BookOpen;return <article className="benefit" key={title as string}><I/><h3>{title as string}</h3><p>{copy as string}</p></article>})}</div></div></section>
+<section className="quick-trial"><div className="container quick-trial-grid"><div><Eyebrow>Try a class</Eyebrow><h2>Your first class is one step away.</h2><p>Choose a few details and we’ll take you straight to your trial class request.</p></div><TrialFinder/></div></section>
+<section className="locations"><div className="container"><SectionHeading eyebrow="Our locations" title="Music, closer to home." copy="Choose the Max & Jeanny branch that fits your family’s rhythm."/><div className="location-grid">{locations.map(l=><LocationCard key={l.name} location={l}/>)}</div></div></section>
+<section className="experience"><div className="container"><SectionHeading eyebrow="Student experience" title="Every lesson leads somewhere." copy="A new song. A little more courage. A stage that once felt impossible."/><div className="gallery-grid">{[[images.teacher,"Learning together"],[images.children,"First discoveries"],[images.adult,"Music at every age"],[images.performance,"The confidence to perform"]].map(([src,label])=><div className="gallery-item" key={label}><Image src={src} alt={label} fill sizes="(max-width:768px) 100vw, 40vw"/><span>{label}</span></div>)}</div></div></section>
+<section className="stories"><div className="container"><SectionHeading eyebrow="Student stories" title="Music means something different to everyone."/><div className="quote-grid">{testimonials.map(t=><blockquote className="quote" key={t.by}><p>“{t.quote}”</p><span>{t.by}</span></blockquote>)}</div></div></section>
+<section className="faq"><div className="container faq-wrap"><SectionHeading eyebrow="Good to know" title="Questions before your first note?"/><div className="faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
+<section className="final-cta"><div className="container"><h2>Make music part of your story.</h2><p>Your first lesson could be the beginning of something you’ll love for life.</p><Button href="/trial" variant="light">Book a Trial Class</Button></div></section>
+</>}

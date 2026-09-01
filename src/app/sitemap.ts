@@ -1,0 +1,1 @@
+﻿import type {MetadataRoute} from "next"; export default function sitemap():MetadataRoute.Sitemap{return ["","/programs","/locations","/about","/contact","/trial"].map(path=>({url:`https://example.com${path}`,lastModified:new Date()}))}
